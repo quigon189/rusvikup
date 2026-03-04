@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Выкуп авто в Петрозаводске – быстро и дорого</title>
+	<!-- Bootstrap 5 CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome 6 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<!-- Яндекс.Карты API (ключ вставьте свой) -->
+	<script src="https://api-maps.yandex.ru/v3/?apikey=ВАШ_КЛЮЧ_API&lang=ru_RU"></script>
+	<style>
+		body {
+			font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+			color: #333;
+			background-color: #fff;
+		}
+
+		/* Шапка с фоновым изображением */
+		.site-header {
+			background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+				url('images/header-bg.jpg') center/cover no-repeat;
+			padding: 15px 0;
+			margin: 0 0 30px 0;
+			position: relative;
+			z-index: 10;
+		}
+
+		.site-title {
+			font-size: 28px;
+			font-weight: 700;
+			color: #424045;
+			margin: 0;
+			line-height: 1.2;
+		}
+
+		.site-description {
+			font-size: 14px;
+			color: #666;
+			margin: 0;
+		}
+
+		.contact-label {
+			font-size: 14px;
+			color: #424045;
+			margin-bottom: 5px;
+		}
+
+		.phone-link {
+			font-size: 24px;
+			font-weight: 600;
+			color: #424045;
+			text-decoration: none;
+			transition: color 0.2s;
+		}
+
+		.phone-link:hover {
+			color: #ffc087;
+		}
+
+		/* Соцсети: прозрачный фон, тёмно-серые иконки */
+		.social-icons a {
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			background: transparent;
+			color: #424045;
+			border-radius: 50%;
+			text-align: center;
+			line-height: 40px;
+			margin-left: 5px;
+			transition: all 0.3s;
+		}
+
+		.social-icons a:hover {
+			background: transparent;
+			color: #ffc087;
+		}
+
+		@media (max-width: 767px) {
+			.site-header .col-md-6 {
+				text-align: center;
+				margin: 0 0 0 0;
+			}
+
+			.site-header .text-md-end {
+				text-align: center !important;
+				margin-top: 15px;
+			}
+
+			.contact-links {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.phone-link {
+				font-size: 20px;
+				margin-bottom: 10px;
+			}
+
+			.social-icons {
+				margin-left: 0 !important;
+			}
+		}
+
+		/* Кнопка-бургер */
+		.menu-toggle {
+			background: none;
+			border: none;
+			font-size: 28px;
+			color: #424045;
+			cursor: pointer;
+			padding: 0;
+			line-height: 1;
+		}
+
+		.menu-toggle:focus {
+			outline: none;
+		}
+
+		/* Мобильное меню (скрыто по умолчанию) */
+		.mobile-menu {
+			display: none;
+			background: rgba(255, 255, 255, 0.95);
+			border-top: 1px solid #eee;
+			margin-top: 10px;
+		}
+
+		.mobile-menu.show {
+			display: flex;
+		}
+
+		.mobile-menu .phone-link {
+			font-size: 20px;
+		}
+
+		.mobile-menu .social-icons a {
+			background: transparent;
+			color: #424045;
+			margin: 0 5px;
+		}
+
+		.mobile-menu .social-icons a:hover {
+			color: #ffc087;
+		}
+
+		/* Hero секция */
+		.hero {
+			background-color: #ffffff;
+			color: #424045;
+			position: relative;
+			min-height: 400px;
+			overflow-x: clip;
+		}
+
+		.hero .container {
+			position: relative;
+			z-index: 2;
+			height: 100%;
+		}
+
+		.hero-text h1 {
+			font-weight: 700;
+			font-size: 2.5rem;
+			margin-bottom: 1rem;
+		}
+
+		.hero-text p {
+			font-size: 1.25rem;
+			margin-bottom: 2rem;
+			opacity: 0.9;
+		}
+
+		.hero-image {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 50%;
+			height: 100%;
+			z-index: 1;
+		}
+
+		.hero-image img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: left center;
+		}
+
+		@media (max-width: 991px) {
+			.hero {
+				min-height: auto;
+				padding: 40px 0;
+			}
+
+			.hero-image {
+				position: static;
+				width: 100%;
+				margin-top: 30px;
+			}
+
+			.hero-image img {
+				max-height: 300px;
+				object-fit: cover;
+				border-radius: 20px;
+			}
+
+			.hero-text {
+				text-align: center;
+			}
+		}
+
+		/* Единый стиль для всех кнопок */
+		.btn-custom {
+			background-color: #ffc087;
+			border-color: #ffc087;
+			color: #424045;
+			padding: 12px 40px;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			border-radius: 5px;
+			transition: all 0.3s;
+		}
+
+		.btn-custom:hover {
+			background-color: #ffa75e;
+			border-color: #ffa75e;
+			color: #fff;
+		}
+
+		/* Заголовки секций */
+		.section-title {
+			font-size: 2rem;
+			font-weight: 700;
+			margin-bottom: 3rem;
+			color: #1d3557;
+			text-align: center;
+		}
+
+		/* Преимущества – убран серый фон */
+		.features {
+			padding: 60px 0;
+			background: transparent;
+		}
+
+		.feature-item {
+			text-align: center;
+			margin-bottom: 30px;
+			padding: 20px;
+			background: white;
+			border-radius: 15px;
+			box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+			height: 100%;
+			transition: transform 0.3s;
+		}
+
+		.feature-item:hover {
+			transform: translateY(-5px);
+		}
+
+		.feature-item i {
+			font-size: 3rem;
+			color: #e63946;
+			margin-bottom: 15px;
+		}
+
+		.feature-item h3 {
+			font-size: 1.5rem;
+			font-weight: 600;
+			margin-bottom: 10px;
+		}
+
+		.feature-item p {
+			color: #666;
+		}
+
+		/* Галерея авто */
+		.cars-gallery {
+			padding: 60px 0;
+			background: transparent;
+		}
+
+		.car-card {
+			background: white;
+			border-radius: 15px;
+			overflow: hidden;
+			box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+			margin-bottom: 30px;
+			transition: transform 0.3s;
+		}
+
+		.car-card:hover {
+			transform: scale(1.02);
+		}
+
+		.car-card img {
+			width: 100%;
+			height: 200px;
+			object-fit: cover;
+			background: #ddd;
+		}
+
+		.car-card .card-body {
+			padding: 20px;
+		}
+
+		.car-card h4 {
+			font-size: 1.4rem;
+			font-weight: 600;
+		}
+
+		.car-card p {
+			margin-bottom: 5px;
+			color: #555;
+		}
+
+		.car-card .price {
+			font-size: 1.3rem;
+			font-weight: 700;
+			color: #e63946;
+			margin-top: 10px;
+		}
+
+		/* Категории – убран серый фон */
+		.categories {
+			background: transparent;
+			padding: 60px 0;
+		}
+
+		.category-item {
+			background: white;
+			border-radius: 15px;
+			padding: 25px;
+			text-align: center;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+			height: 100%;
+			transition: transform 0.3s;
+		}
+
+		.category-item:hover {
+			transform: translateY(-5px);
+		}
+
+		.category-item i {
+			font-size: 2.8rem;
+			color: #e63946;
+			margin-bottom: 15px;
+		}
+
+		.category-item h3 {
+			font-size: 1.4rem;
+			font-weight: 600;
+			margin-bottom: 10px;
+		}
+
+		.category-item p {
+			color: #666;
+			margin-bottom: 0;
+		}
+
+		/* Форма */
+		.form-section {
+			padding: 60px 0;
+			background: white;
+		}
+
+		.form-card {
+			background: #f8f9fa;
+			border-radius: 20px;
+			padding: 30px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+		}
+
+		.form-label {
+			font-weight: 600;
+			color: #1d3557;
+		}
+
+		.form-control,
+		.form-select {
+			border: 2px solid #e0e0e0;
+			border-radius: 10px;
+			padding: 12px;
+			transition: border 0.2s;
+		}
+
+		.form-control:focus,
+		.form-select:focus {
+			border-color: #e63946;
+			box-shadow: none;
+		}
+
+		/* Контакты */
+		/* Контакты – тёмно-серый фон */
+		.contact-info {
+			background: #424045;
+			color: #fff;
+			padding: 40px 0;
+			border-top: 3px solid #ffc087;
+		}
+
+		.contact-info a {
+			color: #fff;
+			text-decoration: none;
+			transition: color 0.2s;
+		}
+
+		.contact-info a:hover {
+			color: #ffc087;
+		}
+
+		.contact-info i {
+			margin-right: 10px;
+			color: #ffc087;
+			/* жёлтые иконки */
+		}
+
+		.contact-info .social-icons a {
+			background: transparent;
+			color: #fff;
+			margin: 0 5px;
+		}
+
+		.contact-info .social-icons a:hover {
+			color: #ffc087;
+		}
+
+		#map {
+			width: 100%;
+			height: 300px;
+			border-radius: 15px;
+			margin-top: 20px;
+			border: 2px solid #ffc087;
+			/* жёлтая рамка */
+		}
+
+		/* Footer – тоже тёмно-серый */
+		footer {
+			background: #424045;
+			color: #fff;
+			padding: 30px 0 20px;
+			text-align: center;
+		}
+
+		footer a {
+			color: #fff;
+			text-decoration: none;
+			transition: color 0.2s;
+		}
+
+		footer a:hover {
+			color: #ffc087;
+		}
+
+		footer .social-icons a {
+			background: transparent;
+			color: #fff;
+			margin: 0 5px;
+		}
+
+		footer .social-icons a:hover {
+			color: #ffc087;
+		}
+
+		@media (max-width: 768px) {
+			.hero h1 {
+				font-size: 2rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<header class="site-header">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h1 class="site-title">AvtoВыкуп</h1>
+					<p class="site-description">Срочный выкуп авто в Карелии</p>
+				</div>
+				<div class="col-md-6 text-md-end">
+					<div class="contact-links">
+						<a href="tel:+79027717088" class="phone-link">+7 (902) 771-70-88</a>
+						<div class="social-icons d-inline-block ms-3">
+							<a href="#" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+	<section class="hero">
+		<div class="container h-100">
+			<div class="row h-100 align-items-center">
+				<div class="col-lg-6 hero-text">
+					<h1>Выкупаем автомобили в любом состоянии быстро и дорого</h1>
+					<h3><b>Узнайте стоимость своего авто прямо сейчас</b></h3>
+					<p>Перезвоним в течение 5 минут</p>
+					<a href="#form" class="btn btn-custom">УЗНАТЬ СТОИМОСТЬ АВТО</a>
+				</div>
+			</div>
+		</div>
+		<div class="hero-image">
+			<img src="images/hero-bg.png" alt="Автомобили">
+		</div>
+	</section>
+
+	<!-- Преимущества (7 пунктов) -->
+	<section class="features">
+		<div class="container">
+			<h2 class="section-title">Преимущества работы с нами</h2>
+			<div class="row g-4">
+				<div class="col-md-4 col-sm-6">
+					<div class="feature-item">
+						<i class="fas fa-clock"></i>
+						<h3>Быстрая оценка</h3>
+						<p>Предварительно оценим авто по телефону в течение 5 минут</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="feature-item">
+						<i class="fas fa-chart-line"></i>
+						<h3>Объективная оценка</h3>
+						<p>Оценим Ваше авто по реальной рыночной цене</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="feature-item">
+						<i class="fas fa-money-bill-wave"></i>
+						<h3>Оплата наличными на месте</h3>
+						<p>Оплата наличными или переводом на карту. Юридическая чистота сделки</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="feature-item">
+						<i class="fas fa-handshake"></i>
+						<h3>Юридическое сопровождение</h3>
+						<p>Все расходы по оформлению документов берём на себя</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="feature-item">
+						<i class="fas fa-truck"></i>
+						<h3>Выезд эвакуатора</h3>
+						<p>Если машина не на ходу – приедем и заберём сами</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="feature-item">
+						<i class="fas fa-map-marker-alt"></i>
+						<h3>Выезд оценщика</h3>
+						<p>Бесплатный выезд по Петрозаводску и Карелии</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Выкупленные автомобили -->
+	<section class="cars-gallery">
+		<div class="container">
+			<h2 class="section-title">Выкупленные автомобили</h2>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="car-card">
+						<img src="images/3_focus.jpg" alt="Ford Focus 3">
+						<div class="card-body">
+							<h4>FORD FOCUS 3</h4>
+							<p>2011 год</p>
+							<div class="price">180 000 ₽</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="car-card">
+						<img src="images/1_lancer.jpg" alt="Mitsubishi Lancer 9">
+						<div class="card-body">
+							<h4>MITSUBISHI LANCER 9</h4>
+							<p>2004 год</p>
+							<div class="price">110 000 ₽</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="car-card">
+						<img src="images/2_astra.jpg" alt="Opel Astra">
+						<div class="card-body">
+							<h4>OPEL ASTRA</h4>
+							<p>2013 год</p>
+							<div class="price">250 000 ₽</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Категории выкупаемых авто -->
+	<section class="categories">
+		<div class="container">
+			<h2 class="section-title">Какие автомобили выкупаем?</h2>
+			<div class="row g-4">
+				<div class="col-md-3 col-sm-6">
+					<div class="category-item">
+						<i class="fas fa-car-crash"></i>
+						<h3>После ДТП</h3>
+						<p>Битые автомобили, неисправные, требующие эвакуации</p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="category-item">
+						<i class="fas fa-credit-card"></i>
+						<h3>Кредитные</h3>
+						<p>Автомобили, находящиеся в залоге у банка</p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="category-item">
+						<i class="fas fa-road"></i>
+						<h3>С пробегом</h3>
+						<p>Любая марка и модель, любой год выпуска</p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="category-item">
+						<i class="fas fa-file-alt"></i>
+						<h3>Проблемные</h3>
+						<p>С утраченными документами, проблемы с регистрацией</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Форма оценки -->
+	<section class="form-section" id="form">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<h2 class="section-title">Заполните форму</h2>
+					<p class="text-center mb-4">И мы перезвоним вам уже через 5 минут</p>
+					<div class="form-card">
+						<form id="carEvaluationForm" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<label for="brand" class="form-label">Марка</label>
+									<input type="text" class="form-control" id="brand" name="brand" required>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label for="model" class="form-label">Модель</label>
+									<input type="text" class="form-control" id="model" name="model" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 mb-3">
+									<label for="year" class="form-label">Год выпуска</label>
+									<input type="number" class="form-control" id="year" name="year" min="1900" max="2026" step="1"
+										placeholder="2015">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label for="condition" class="form-label">Состояние</label>
+									<select class="form-select" id="condition" name="condition">
+										<option value="отличное">Отличное</option>
+										<option value="хорошее">Хорошее</option>
+										<option value="среднее">Среднее</option>
+										<option value="требует ремон��а">Требует ремонта</option>
+										<option value="аварийное">Аварийное</option>
+									</select>
+								</div>
+								<div class="col-md-4 mb-3 d-flex align-items-end">
+									<div class="form-check mb-3">
+										<input class="form-check-input" type="checkbox" id="notBeaten" name="notBeaten">
+										<label class="form-check-label" for="notBeaten">Не битый</label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<label for="price" class="form-label">Желаемая цена (₽)</label>
+									<input type="number" class="form-control" id="price" name="price" placeholder="Например, 500000">
+								</div>
+								<div class="col-md-6 mb-3">
+									<label for="phone" class="form-label">Ваш телефон</label>
+									<input type="tel" class="form-control" id="phone" name="phone" placeholder="+7 (___) ___-__-__"
+										required>
+								</div>
+							</div>
+							<div class="mb-4">
+								<label for="photo" class="form-label">Выберите фото автомобиля</label>
+								<input class="form-control" type="file" id="photo" name="photo" accept="image/*">
+								<div class="form-text">Прикрепите фото (до 10 МБ)</div>
+							</div>
+							<button type="submit" class="btn btn-custom w-100">УЗНАТЬ СТОИМОСТЬ АВТО</button>
+						</form>
+						<div class="text-center mt-4">
+							<p class="mb-2">Или напишите нам в мессенджеры:</p>
+							<div class="social-icons">
+								<a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+								<a href="#" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+								<a href="#" target="_blank"><i class="fab fa-viber"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Контакты и карта -->
+	<!-- Контакты и карта -->
+	<section class="contact-info">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h4>AvtoВыкуп</h4>
+					<p><i class="fas fa-map-marker-alt"></i> Петрозаводск, ул. Энтузиастов, 15</p>
+					<p><i class="fas fa-phone-alt"></i> <a href="tel:+79027717088">+7 (902) 771-70-88</a></p>
+					<p><i class="far fa-clock"></i> Ежедневно с 7:00 до 22:00</p>
+					<div class="social-icons mt-3">
+						<a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+						<a href="#" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+						<a href="#" target="_blank"><i class="fab fa-viber"></i></a>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div id="map"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<p>&copy; 2026 AvtoВыкуп. Все права защищены.</p>
+		</div>
+	</footer>
+
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Яндекс.Карта -->
+	<script>
+		ymaps3.ready.then(() => {
+			const {YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker} = ymaps3;
+			const map = new YMap(document.getElementById('map'), {
+				location: {
+					center: [34.369, 61.787],
+					zoom: 13
+				}
+			});
+			map.addChild(new YMapDefaultSchemeLayer());
+			map.addChild(new YMapDefaultFeaturesLayer());
+			const marker = document.createElement('div');
+			marker.style.backgroundColor = '#e63946';
+			marker.style.width = '20px';
+			marker.style.height = '20px';
+			marker.style.borderRadius = '50%';
+			marker.style.border = '3px solid white';
+			map.addChild(new YMapMarker({coordinates: [34.369, 61.787]}, marker));
+		});
+	</script>
+
+	<!-- Отправка формы -->
+	<script>
+		document.getElementById('carEvaluationForm').addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const form = e.target;
+			const formData = new FormData(form);
+			const statusDiv = document.createElement('div');
+			statusDiv.className = 'mt-3';
+			form.appendChild(statusDiv);
+			const btn = form.querySelector('button[type="submit"]');
+			btn.disabled = true;
+			btn.textContent = 'Отправка...';
+
+			try {
+				// Замените URL на адрес вашего бэкенда
+				const response = await fetch('https://your-api-gateway-url/submit', {
+					method: 'POST',
+					body: formData
+				});
+				const result = await response.json();
+				if (response.ok) {
+					statusDiv.innerHTML = '<div class="alert alert-success">Заявка отправлена! Мы перезвоним в течение 5 минут.</div>';
+					form.reset();
+				} else {
+					statusDiv.innerHTML = `<div class="alert alert-danger">Ошибка: ${result.error || 'Повторите попытку'}</div>`;
+				}
+			} catch (error) {
+				statusDiv.innerHTML = '<div class="alert alert-danger">Ошибка сети. Проверьте соединение.</div>';
+			} finally {
+				btn.disabled = false;
+				btn.textContent = 'УЗНАТЬ СТОИМОСТЬ АВТО';
+			}
+		});
+	</script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const toggle = document.getElementById('mobileMenuToggle');
+			const menu = document.getElementById('mobileMenu');
+			toggle.addEventListener('click', function () {
+				menu.classList.toggle('show');
+				// Меняем иконку на крестик при открытии
+				const icon = toggle.querySelector('i');
+				if (menu.classList.contains('show')) {
+					icon.classList.remove('fa-bars');
+					icon.classList.add('fa-times');
+				} else {
+					icon.classList.remove('fa-times');
+					icon.classList.add('fa-bars');
+				}
+			});
+		});
+	</script>
+	
+	<!-- Яндекс.Метрика (замените номер счётчика) -->
+	<script type="text/javascript">
+		(function (m, e, t, r, i, k, a) {
+			m[i] = m[i] || function () {(m[i].a = m[i].a || []).push(arguments);};
+			m[i].l = 1 * new Date();
+			for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) return;}
+			k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a);
+		})(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+		ym(61718425, "init", {
+			clickmap: true,
+			trackLinks: true,
+			accurateTrackBounce: true,
+			webvisor: true
+		});
+	</script>
+	<noscript>
+		<div><img src="https://mc.yandex.ru/watch/61718425" style="position:absolute; left:-9999px;" alt=""></div>
+	</noscript>
+
+</body>
+
+</html>
