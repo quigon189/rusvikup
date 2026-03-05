@@ -1,0 +1,396 @@
+body {
+    font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    color: #333;
+    background-color: #fff;
+}
+
+/* Шапка без фонового изображения, с линией */
+.site-header {
+    background: #ffffff;
+    padding: 15px 0;
+    margin: 0 0 30px 0;
+    border-bottom: 3px solid #ffc087;
+    position: relative;
+    z-index: 10;
+}
+
+.site-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #424045;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.site-description {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.contact-label {
+    font-size: 14px;
+    color: #424045;
+    margin-bottom: 5px;
+}
+
+.phone-link {
+    font-size: 24px;
+    font-weight: 600;
+    color: #424045;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.phone-link:hover {
+    color: #ffc087;
+}
+
+/* Соцсети удалены, но стили остаются на случай, если они появятся */
+.social-icons a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    color: #424045;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    margin-left: 5px;
+    transition: all 0.3s;
+}
+
+.social-icons a:hover {
+    background: transparent;
+    color: #ffc087;
+}
+
+@media (max-width: 767px) {
+    .site-header .col-md-6 {
+        text-align: center;
+        margin: 0 0 0 0;
+    }
+    .site-header .text-md-end {
+        text-align: center !important;
+        margin-top: 15px;
+    }
+    .contact-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .phone-link {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .social-icons {
+        margin-left: 0 !important;
+    }
+}
+
+/* Hero секция */
+.hero {
+    background-color: #ffffff;
+    color: #424045;
+    position: relative;
+    min-height: 600px;
+    overflow-x: clip;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+}
+
+.hero-text h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+}
+
+@media (max-width: 991px) {
+    .hero {
+        min-height: auto;
+        padding: 40px 0;
+    }
+    .hero-image {
+        position: static;
+        width: 100%;
+        margin-top: 30px;
+    }
+    .hero-image img {
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+    .hero-text {
+        text-align: center;
+    }
+}
+
+/* Единый стиль для всех кнопок */
+.btn-custom {
+    background-color: #ffc087;
+    border-color: #ffc087;
+    color: #424045;
+    padding: 12px 40px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.btn-custom:hover {
+    background-color: #ffa75e;
+    border-color: #ffa75e;
+    color: #fff;
+}
+
+/* Заголовки секций */
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: #1d3557;
+    text-align: center;
+}
+
+/* Преимущества */
+.features {
+    padding: 60px 0;
+    background: transparent;
+}
+
+.feature-item {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: transform 0.3s;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-item i {
+    font-size: 3rem;
+    color: #e63946;
+    margin-bottom: 15px;
+}
+
+.feature-item h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    color: #666;
+}
+
+/* Галерея авто */
+.cars-gallery {
+    padding: 60px 0;
+    background: transparent;
+}
+
+.car-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    transition: transform 0.3s;
+}
+
+.car-card:hover {
+    transform: scale(1.02);
+}
+
+.car-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: #ddd;
+}
+
+.car-card .card-body {
+    padding: 20px;
+}
+
+.car-card h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.car-card p {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.car-card .price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #e63946;
+    margin-top: 10px;
+}
+
+/* Категории */
+.categories {
+    background: transparent;
+    padding: 60px 0;
+}
+
+.category-item {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: transform 0.3s;
+}
+
+.category-item:hover {
+    transform: translateY(-5px);
+}
+
+.category-item i {
+    font-size: 2.8rem;
+    color: #e63946;
+    margin-bottom: 15px;
+}
+
+.category-item h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.category-item p {
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Форма */
+.form-section {
+    padding: 60px 0;
+    background: white;
+}
+
+.form-card {
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #1d3557;
+}
+
+.form-control,
+.form-select {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 12px;
+    transition: border 0.2s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #e63946;
+    box-shadow: none;
+}
+
+/* Контакты */
+.contact-info {
+    background: #424045;
+    color: #fff;
+    padding: 40px 0;
+    border-top: 3px solid #ffc087;
+}
+
+.contact-info a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.contact-info a:hover {
+    color: #ffc087;
+}
+
+.contact-info i {
+    margin-right: 10px;
+    color: #ffc087;
+}
+
+#map {
+    width: 100%;
+    height: 300px;
+    border-radius: 15px;
+    border: 2px solid #ffc087;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+#map iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+    display: block;
+}
+
+/* Footer */
+footer {
+    background: #424045;
+    color: #fff;
+    padding: 30px 0 20px;
+    text-align: center;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: #ffc087;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+}
