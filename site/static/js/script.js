@@ -12,7 +12,7 @@ document.getElementById('carEvaluationForm').addEventListener('submit', async (e
 
     try {
         // Замените URL на адрес вашего бэкенда
-        const response = await fetch('https://your-api-gateway-url/submit', {
+        const response = await fetch('https://functions.yandexcloud.net/d4e48dnd65n2mo92fb2s', {
             method: 'POST',
             body: formData
         });
