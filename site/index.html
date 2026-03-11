@@ -184,22 +184,22 @@
 						<form id="carEvaluationForm" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-md-6 mb-3">
-									<label for="brand" class="form-label">Марка</label>
+									<label for="brand" class="form-label">Марка*</label>
 									<input type="text" class="form-control" id="brand" name="brand" required>
 								</div>
 								<div class="col-md-6 mb-3">
-									<label for="model" class="form-label">Модель</label>
+									<label for="model" class="form-label">Модель*</label>
 									<input type="text" class="form-control" id="model" name="model" required>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-4 mb-3">
-									<label for="year" class="form-label">Год выпуска</label>
-									<input type="number" class="form-control" id="year" name="year" min="1900" max="2026" step="1"
+									<label for="year" class="form-label">Год выпуска*</label>
+									<input type="number" class="form-control" id="year" name="year" min="1900" max="2050" step="1"
 										placeholder="2015">
 								</div>
 								<div class="col-md-4 mb-3">
-									<label for="condition" class="form-label">Состояние</label>
+									<label for="condition" class="form-label">Состояние*</label>
 									<select class="form-select" id="condition" name="condition">
 										<option value="отличное">Отличное</option>
 										<option value="хорошее">Хорошее</option>
@@ -217,23 +217,26 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6 mb-3">
-									<label for="price" class="form-label">Желаемая цена (₽)</label>
+									<label for="price" class="form-label">Желаемая цена (₽)*</label>
 									<input type="number" class="form-control" id="price" name="price" placeholder="Например, 500000">
 								</div>
 								<div class="col-md-6 mb-3">
-									<label for="phone" class="form-label">Ваш телефон</label>
+									<label for="phone" class="form-label">Ваш телефон*</label>
 									<input type="tel" class="form-control" id="phone" name="phone" placeholder="+7 (___) ___-__-__"
 										required>
 								</div>
 							</div>
+							<div class="mb-3">
+								<label for="message" class="form-label">Введите сообщение</label>
+								<input class="form-control" type="text" id="message" name="message">
+							</div>
 							<div class="mb-4">
-								<label for="photo" class="form-label">Выберите фото автомобиля</label>
-								<input class="form-control" type="file" id="photo" name="photo" accept="image/*">
-								<div class="form-text">Прикрепите фото (до 10 МБ)</div>
+								<label for="photo" class="form-label">Выберите фотографии автомобиля</label>
+								<input class="form-control" type="file" id="photo" name="photo" accept="image/*" multiple>
+								<div class="form-text">Можете прикрепить несколько фото (до 10 МБ каждое)</div>
 							</div>
 							<button type="submit" class="btn btn-custom w-100">УЗНАТЬ СТОИМОСТЬ АВТО</button>
 						</form>
-						<!-- Блок с мессенджерами удалён -->
 					</div>
 				</div>
 			</div>

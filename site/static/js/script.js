@@ -3,9 +3,15 @@ document.getElementById('carEvaluationForm').addEventListener('submit', async (e
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const statusDiv = document.createElement('div');
-    statusDiv.className = 'mt-3';
-    form.appendChild(statusDiv);
+
+    // Используем существующий контейнер для сообщений или создаём новый
+    let statusDiv = form.querySelector('.mt-3');
+    if (!statusDiv) {
+        statusDiv = document.createElement('div');
+        statusDiv.className = 'mt-3';
+        form.appendChild(statusDiv);
+    }
+
     const btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.textContent = 'Отправка...';
