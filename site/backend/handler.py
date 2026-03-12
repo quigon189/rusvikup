@@ -117,9 +117,24 @@ def handler(event, context):
             form[field.field_name.decode()] = field.value.decode()
 
         def on_file(file):
-            files.append(file)
+            file_content = file.file_object.read()
+            filename = file.file_name
+            if isinstance(filename, bytes):
+                filename = filename.decode('utf-8')
+            files.append((file_content, filename))
 
-        parse_form(headers, stream, on_field, on_file)
+        def on_file_finished(file):
+            if file.file_name:
+                # Важно: используем .file_object, который уже закрыт или готов к чтению
+                file.file_object.seek(0)
+                content = file.file_object.read()
+                # Если content пустой, значит данные еще в буфере или не сброшены
+                if content:
+                    filename = file.file_name.decode() if isinstance(
+                        file.file_name, bytes) else file.file_name
+                    files.append((content, filename))
+
+        parse_form(headers, stream, on_field, on_file_finished)
 
         # Извлекаем поля формы
         brand = form.get('brand', '')
@@ -142,17 +157,8 @@ def handler(event, context):
             'message': message
         }
 
-        # Обрабатываем все приложенные файлы
-        attachments = []
-        # if files:
-        #     for file_obj in files:
-        #         # Читаем содержимое файла
-        #         file_content = file_obj.file.read()
-        #         filename = file_obj.filename
-        #         attachments.append((file_content, filename))
-
         # Отправляем email
-        email_ok = send_email(phone, data, attachments)
+        email_ok = send_email(phone, data, files)
 
         # При необходимости можно добавить отправку в Telegram,
         # но с несколькими фото это потребует доработки (например, отправка медиагруппой)
