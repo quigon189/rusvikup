@@ -9,7 +9,7 @@ body {
     background: #ffffff;
     padding: 15px 0;
     margin: 0 0 30px 0;
-    border-bottom: 3px solid #ffc087;
+    border-bottom: 3px solid #ffcd05;
     position: relative;
     z-index: 10;
 }
@@ -43,7 +43,7 @@ body {
 }
 
 .phone-link:hover {
-    color: #ffc087;
+    color: #ffcd05;
 }
 
 /* Соцсети удалены, но стили остаются на случай, если они появятся */
@@ -62,7 +62,7 @@ body {
 
 .social-icons a:hover {
     background: transparent;
-    color: #ffc087;
+    color: #ffcd05;
 }
 
 @media (max-width: 767px) {
@@ -88,73 +88,10 @@ body {
     }
 }
 
-/* Hero секция */
-.hero {
-    background-color: #ffffff;
-    color: #424045;
-    position: relative;
-    min-height: 600px;
-    overflow-x: clip;
-}
-
-.hero .container {
-    position: relative;
-    z-index: 2;
-    height: 100%;
-}
-
-.hero-text h1 {
-    font-weight: 700;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.hero-text p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-}
-
-.hero-image {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    z-index: 1;
-}
-
-.hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: left center;
-}
-
-@media (max-width: 991px) {
-    .hero {
-        min-height: auto;
-        padding: 40px 0;
-    }
-    .hero-image {
-        position: static;
-        width: 100%;
-        margin-top: 30px;
-    }
-    .hero-image img {
-        max-height: 300px;
-        object-fit: cover;
-        border-radius: 20px;
-    }
-    .hero-text {
-        text-align: center;
-    }
-}
-
 /* Единый стиль для всех кнопок */
 .btn-custom {
-    background-color: #ffc087;
-    border-color: #ffc087;
+    background-color: #ffcd05;
+    border-color: #ffcd05;
     color: #424045;
     padding: 12px 40px;
     font-weight: 600;
@@ -165,8 +102,8 @@ body {
 }
 
 .btn-custom:hover {
-    background-color: #ffa75e;
-    border-color: #ffa75e;
+    background-color: #dbb20e;
+    border-color: #dbb20e;
     color: #fff;
 }
 
@@ -337,7 +274,7 @@ body {
     background: #424045;
     color: #fff;
     padding: 40px 0;
-    border-top: 3px solid #ffc087;
+    border-top: 3px solid #ffcd05;
 }
 
 .contact-info a {
@@ -347,19 +284,19 @@ body {
 }
 
 .contact-info a:hover {
-    color: #ffc087;
+    color: #ffcd05;
 }
 
 .contact-info i {
     margin-right: 10px;
-    color: #ffc087;
+    color: #ffcd05;
 }
 
 #map {
     width: 100%;
     height: 300px;
     border-radius: 15px;
-    border: 2px solid #ffc087;
+    border: 2px solid #ffcd05;
     overflow: hidden;
     margin-top: 20px;
 }
@@ -386,11 +323,215 @@ footer a {
 }
 
 footer a:hover {
-    color: #ffc087;
+    color: #ffcd05;
 }
 
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2rem;
+.header-icon {
+		height: 48px;          /* регулируйте под свой логотип */
+		width: auto;
+		margin-right: 12px;
+		transition: transform 0.2s ease;
+}
+.header-icon:hover {
+		transform: scale(1.02);
+}
+.title-wrapper {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+}
+/* мелкий адаптив: на очень узких экранах иконка сверху */
+@media (max-width: 576px) {
+		.title-wrapper {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 8px;
+		}
+		.header-icon {
+				margin-right: 0;
+				margin-bottom: 6px;
+		}
+}
+
+/* ------------------------- */
+
+/* Hero секция — высота 500px на десктопе */
+.hero {
+    background-color: #ffffff;
+    color: #424045;
+    height: 600px;           /* фиксированная высота */
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    overflow-x: clip;        /* скрываем горизонтальный скролл, но картинка вылетает */
+}
+
+.hero .container,
+.hero .row {
+    height: 100%;
+}
+
+/* Левая колонка с текстом */
+.hero-text h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0;           /* убираем лишний отступ */
+}
+
+.hero-text h3 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* Правая колонка — обёртка картинки на всю высоту */
+.hero .col-md-7 {
+    height: 100%;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    overflow: visible;
+}
+
+/* Картинка: прижата к левому верхнему углу, занимает всю высоту, вылетает вправо */
+.hero-image {
+    display: block;
+    margin: 0;
+    position: relative;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    object-fit: contain;      /* не обрезаем, картинка видна полностью */
+    object-position: left top;
+}
+
+/* На десктопе (≥768px) картинка становится шире колонки и выходит за правый край окна */
+@media (min-width: 768px) {
+    .hero-image {
+        min-width: 130%;      /* вылет за правую границу */
+        width: auto;
+    }
+}
+
+/* Мобильная версия: высота auto, картинка под текстом без вылета */
+@media (max-width: 767px) {
+    .hero {
+        height: auto;
+        min-height: auto;
+    }
+    .hero .container,
+    .hero .row {
+        height: auto;
+    }
+    .hero-text {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .hero-image {
+        width: 100%;
+        height: auto;
+        min-width: auto;
+        border-radius: 20px;
+        object-fit: cover;
+        max-height: 300px;
+    }
+    .hero .col-md-7 {
+        height: auto;
+    }
+    .hero-image-wrapper {
+        height: auto;
+    }
+}
+
+/* Улучшение читаемости текста на экранах меньше 1200px */
+@media (max-width: 1199px) {
+    .hero-text h1 {
+        font-size: 2rem;         /* был 2.5rem */
+        margin-bottom: 0.75rem;
+    }
+    .hero-text h3 {
+        font-size: 1.25rem;      /* был 1.5rem */
+        margin: 0.75rem 0;
+    }
+    .hero-text p {
+        font-size: 1rem;         /* был 1.25rem */
+        margin-bottom: 1.5rem;
+    }
+    .btn-custom {
+        padding: 10px 30px;      /* чуть меньше кнопка */
+        font-size: 0.9rem;
+    }
+}
+
+/* Для экранов от 768px до 991px (планшеты) – дополнительно уменьшаем отступы */
+@media (max-width: 991px) {
+    .hero {
+        height: auto;
+        min-height: 500px;       /* сохраняем минимальную высоту, но не фиксированную */
+    }
+    .hero-text {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+    .hero-text h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* На маленьких экранах (до 767px) – как было, но корректируем шрифты для единообразия */
+@media (max-width: 767px) {
+    .hero {
+        height: auto;
+        min-height: auto;
+    }
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+    .hero-text h3 {
+        font-size: 1.2rem;
+    }
+    .hero-text p {
+        font-size: 1rem;
+    }
+}
+
+/* Центрирование title-wrapper на мобильных, но сохраняем строку иконка+текст */
+@media (max-width: 767px) {
+    .title-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        text-align: left;
+    }
+    .title-wrapper .header-icon {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .title-wrapper {
+        gap: 8px;
+        flex-wrap: wrap;     /* при очень малой ширине текст может уйти на новую строку */
+        justify-content: center;
     }
 }
