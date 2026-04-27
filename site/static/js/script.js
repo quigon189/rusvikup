@@ -18,7 +18,7 @@ document.getElementById('carEvaluationForm').addEventListener('submit', async (e
 
     try {
         // Замените URL на адрес вашего бэкенда
-        const response = await fetch('https://functions.yandexcloud.net/d4e48dnd65n2mo92fb2s', {
+        const response = await fetch('https://functions.yandexcloud.net/d4eoq68f5igmvk27h8ji', {
             method: 'POST',
             body: formData
         });

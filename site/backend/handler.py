@@ -34,12 +34,10 @@ def send_email(phone, data, attachments=None):
 
         # Формируем текст письма из всех полей формы
         body = f"""
-Марка: {data.get('brand', '')}
-Модель: {data.get('model', '')}
+Марка и модель: {data.get('brand', '')}
 Год: {data.get('year', '')}
-Состояние: {data.get('condition', '')}
-Не битый: {'Да' if data.get('notBeaten') else 'Нет'}
 Желаемая цена: {data.get('price', '')} ₽
+-----------
 Телефон: {data.get('phone', '')}
 Сообщение: {data.get('message', '')}
 """
@@ -95,9 +93,20 @@ def handler(event, context):
     Ожидает POST запрос с multipart/form-data (форма с файлами).
     """
     try:
+
+        if event['httpMethod'] == 'OPTIONS':
+            return {
+                'statusCode': 200,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                    'Access-Control-Max-Age': '3600'
+                },
+                'body': ''
+            }
+
         headers = event.get('headers', {})
-        content_type = headers.get(
-            'content-type') or headers.get('Content-Type', '')
         is_base64 = event.get('isBase64Encoded', False)
         body = event.get('body', '')
 
@@ -116,13 +125,6 @@ def handler(event, context):
         def on_field(field):
             form[field.field_name.decode()] = field.value.decode()
 
-        def on_file(file):
-            file_content = file.file_object.read()
-            filename = file.file_name
-            if isinstance(filename, bytes):
-                filename = filename.decode('utf-8')
-            files.append((file_content, filename))
-
         def on_file_finished(file):
             if file.file_name:
                 # Важно: используем .file_object, который уже закрыт или готов к чтению
@@ -138,20 +140,14 @@ def handler(event, context):
 
         # Извлекаем поля формы
         brand = form.get('brand', '')
-        model = form.get('model', '')
         year = form.get('year', '')
-        condition = form.get('condition', '')
-        not_beaten = form.get('notBeaten', '')  # будет 'on' если отмечен
         price = form.get('price', '')
         phone = form.get('phone', '')
-        message = form.get('message', '')  # новое необязательное поле
+        message = form.get('message', '')
 
         data = {
             'brand': brand,
-            'model': model,
             'year': year,
-            'condition': condition,
-            'not_beaten': not_beaten,
             'price': price,
             'phone': phone,
             'message': message
@@ -166,13 +162,19 @@ def handler(event, context):
         if email_ok:
             return {
                 'statusCode': 200,
-                'headers': {'Content-Type': 'application/json'},
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
                 'body': '{"status": "ok", "message": "Сообщение отправлено"}'
             }
         else:
             return {
                 'statusCode': 500,
-                'headers': {'Content-Type': 'application/json'},
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
                 'body': '{"error": "Failed to send notifications"}'
             }
 
